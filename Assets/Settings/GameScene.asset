@@ -18,10 +18,10 @@ MonoBehaviour:
     m_Value: 0
   threshold:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.52
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.39
   scatter:
     m_OverrideState: 1
     m_Value: 0.5
@@ -32,7 +32,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   filter:
     m_OverrideState: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FilmGrain
-  active: 1
+  active: 0
   type:
     m_OverrideState: 1
     m_Value: 6
@@ -185,7 +185,7 @@ MonoBehaviour:
     m_Value: {x: 0.711013, y: 0.7804724, z: 1, w: 0.2738386}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9849689, z: 0.7378179, w: 0.41075847}
+    m_Value: {x: 1, y: 0.8914721, z: 0.66396403, w: 0.41075847}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
