@@ -1,9 +1,14 @@
 
 using UnityEngine;
+public enum ItemType { Key, Crowbar, Other }
 
 public class PickupItem : MonoBehaviour
 {
     public string itemName = "KEY1";
+
+    public ItemType itemType = ItemType.Key;
+
+    public bool IsHeld { get; private set; }
 
     [Header("ตำแหน่งตอนถือ")]
     public Vector3 heldPosition =
@@ -16,6 +21,8 @@ public class PickupItem : MonoBehaviour
     {
         // แสดงชื่อกุญแจใน Console เมื่อเก็บสำเร็จ
         Debug.Log("เก็บกุญแจ: " + itemName, this);
+
+        IsHeld = true;
 
         // ปิด Collider เพื่อไม่ให้บังการตรวจจับวัตถุอื่น
         foreach (Collider col in GetComponentsInChildren<Collider>())
@@ -41,6 +48,7 @@ public class PickupItem : MonoBehaviour
 
     public void Drop(Vector3 forward, Vector3 cameraPosition)
     {
+        IsHeld = false;
         // นำวัตถุออกจากมือ
         transform.SetParent(null);
 
