@@ -87,7 +87,7 @@ DustGust.Trigger(ghost.position, 0.6f);          // weaker stir, e.g. ghost runs
 ```
 Dust/fog within 12 m of the point swirls for a moment, then settles.
 
-## 6. Tuning cheat sheet
+## 5. Tuning cheat sheet
 
 | Want to change… | Where |
 |---|---|
