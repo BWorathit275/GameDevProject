@@ -12,7 +12,7 @@ public class HeartTest : MonoBehaviour
     public float invulnerableTime = 1f;
 
     [Header("Effects")]
-    public ParticleSystem bloodScreen;
+    public BloodScreenHit bloodScreen;
     public ParticleSystem bloodBody;
     public Animator injuryAnimator;
     [Tooltip("How long the injury look takes to blend to the new heart level.")]
@@ -53,7 +53,7 @@ public class HeartTest : MonoBehaviour
 
             bool attacking = (bool)attackCooldownField.GetValue(ghosts[i]);
             if (attacking && !ghostWasAttacking[i])
-                TakeHit();
+                TakeHit(ghosts[i].transform.position + Vector3.up);
             ghostWasAttacking[i] = attacking;
         }
 
@@ -64,18 +64,36 @@ public class HeartTest : MonoBehaviour
             injuryAnimator.SetFloat("Injury", injury);
     }
 
+    // Hit with no known source (test key): heavy blood on a random side.
     public void TakeHit()
     {
-        if (hearts <= 0 || Time.time - lastHitTime < invulnerableTime)
+        if (!LoseHeart())
             return;
-
-        lastHitTime = Time.time;
-        hearts--;
-
         if (bloodScreen != null)
             bloodScreen.Play();
         if (bloodBody != null)
             bloodBody.Play();
+    }
+
+    // Hit from a position (the ghost): heavy blood on the side facing it.
+    public void TakeHit(Vector3 hitFrom)
+    {
+        if (!LoseHeart())
+            return;
+        if (bloodScreen != null)
+            bloodScreen.Play(hitFrom);
+        if (bloodBody != null)
+            bloodBody.Play();
+    }
+
+    bool LoseHeart()
+    {
+        if (hearts <= 0 || Time.time - lastHitTime < invulnerableTime)
+            return false;
+
+        lastHitTime = Time.time;
+        hearts--;
+        return true;
     }
 
     public void ResetHearts()

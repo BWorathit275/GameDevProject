@@ -3089,6 +3089,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8372864644921422780, guid: 7b1a7a7bc3028e54682e468e4fde57db, type: 3}
   m_PrefabInstance: {fileID: 199228605}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &199228607 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6813473637919411169, guid: 7b1a7a7bc3028e54682e468e4fde57db, type: 3}
+  m_PrefabInstance: {fileID: 199228605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8e8e754fcaae54b9f3992ef3cd2c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BloodScreenHit
 --- !u!1001 &207222007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21595,7 +21606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HeartTest
   maxHearts: 5
   invulnerableTime: 1
-  bloodScreen: {fileID: 1144894861}
+  bloodScreen: {fileID: 199228607}
   bloodBody: {fileID: 1998220143}
   injuryAnimator: {fileID: 1687229191}
   injuryBlendTime: 0.5
@@ -21869,11 +21880,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3033727062268340128, guid: 1ee2122e83f0091408b1a39629aac9af, type: 3}
---- !u!198 &1144894861 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7746707627707411746, guid: 7b1a7a7bc3028e54682e468e4fde57db, type: 3}
-  m_PrefabInstance: {fileID: 199228605}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1153088653
 GameObject:
   m_ObjectHideFlags: 0
