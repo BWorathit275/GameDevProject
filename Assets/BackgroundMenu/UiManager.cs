@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        SceneManager.LoadScene("Basement");
+        SceneManager.LoadScene("LoadingScene");
     }
 
     public void ShowMainMenu()
