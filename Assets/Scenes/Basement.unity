@@ -14525,8 +14525,16 @@ MonoBehaviour:
   fullHeart: {fileID: 21300000, guid: 62b6559506c6a6846a5db7ab74f7ba41, type: 3}
   emptyHeart: {fileID: 21300000, guid: fd3d6688ed273584287555356adabb05, type: 3}
   bloodScreen: {fileID: 648651134}
+  bloodBody: {fileID: 1870899320}
+  bloodLinger: {fileID: 0}
   injuryAnimator: {fileID: 1549501984}
   injuryBlendTime: 0.5
+  regenTime: 30
+  hiddenRegenMultiplier: 2
+  hitResetsRegen: 1
+  healPopScale: 1.4
+  healPopTime: 0.35
+  healFlashColor: {r: 1, g: 0.6, b: 0.6, a: 1}
 --- !u!114 &547605939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73185,6 +73193,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f3eef0b27511c141870c5df55aa61e8, type: 3}
+--- !u!198 &1870899320 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8907542111633560566, guid: 8f3eef0b27511c141870c5df55aa61e8, type: 3}
+  m_PrefabInstance: {fileID: 1870899319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1877969331
 GameObject:
   m_ObjectHideFlags: 0

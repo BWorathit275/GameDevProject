@@ -21,6 +21,7 @@ public class PlayerHide : MonoBehaviour
 
     public void ExitHiding(Transform exitPoint)
     {
+        IsHidden = false;
         lockerLook.enabled = false;
 
         transform.SetPositionAndRotation(exitPoint.position, exitPoint.rotation);
