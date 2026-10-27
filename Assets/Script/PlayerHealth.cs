@@ -16,6 +16,14 @@ public class PlayerHealth : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+
+    [Header("Blood Effect")]
+    public BloodScreenHit bloodScreen;
+    public Animator injuryAnimator;          // the InjuryEffect object
+    public float injuryBlendTime = 0.5f;
+
+    private float injury;
+
     private bool isDead = false;
 
     void Start()
@@ -24,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
         UpdateHearts();
     }
 
-    public void TakeDamage(int damage = 1)
+    public void TakeDamage(int damage = 1, Transform attacker = null)
     {
         if (isDead) return;
 
@@ -33,10 +41,15 @@ public class PlayerHealth : MonoBehaviour
 
         UpdateHearts();
 
-        if (currentHealth <= 0)
+        // เอฟเฟกต์เลือดบนจอ
+        if (bloodScreen != null)
         {
-            Die();
+            if (attacker != null) bloodScreen.Play(attacker.position); // สาดด้านที่ผีอยู่
+            else bloodScreen.Play();                                   // สุ่มด้าน
         }
+
+        if (currentHealth <= 0)
+            Die();
     }
 
     public void Heal(int amount = 1)
@@ -61,6 +74,14 @@ public class PlayerHealth : MonoBehaviour
                     i < currentHealth ? fullHeart : emptyHeart;
             }
         }
+    }
+    void Update()
+    {
+        // 0 = full hearts, 1 = last heart; eased so it fades in rather than snapping
+        float target = (maxHealth - Mathf.Max(currentHealth, 1)) / (float)(maxHealth - 1);
+        injury = Mathf.MoveTowards(injury, target, Time.unscaledDeltaTime / injuryBlendTime);
+        if (injuryAnimator != null)
+            injuryAnimator.SetFloat("Injury", injury);
     }
 
     void Die()
