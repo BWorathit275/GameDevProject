@@ -148,8 +148,7 @@ MonoBehaviour:
   attackCooldown: 1
   damage: 1
   damageDelay: 0.2
-  animator: {fileID: 0}
-  attackTrigger: Attack
+  player: {fileID: 0}
 --- !u!1 &936939310574139106
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +627,7 @@ MonoBehaviour:
   viewAngle: 120
   eyeHeight: 1.5
   playerTargetHeight: 1
+  logVision: 1
 --- !u!114 &5520860307148347096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,7 +653,9 @@ MonoBehaviour:
   pauseMovementAfterAttack: 1.5
   damageDelay: 1
   attack: {fileID: 0}
-  searchDuration: 3
+  searchDuration: 5
+  loseSightGrace: 1
+  searchRadius: 4
 --- !u!114 &3410257480502877421
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class ThinGhostSound : MonoBehaviour
 
         source.playOnAwake = false;
         source.loop = shouldLoop;
-        source.spatialBlend = 0f;
+        source.spatialBlend = 1f; // เสียง 3D ได้ยินตามระยะและทิศทางของผี
         source.volume = 1f;
         source.mute = false;
         source.enabled = true;

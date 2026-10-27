@@ -64,7 +64,8 @@ public class FatGhostChase : MonoBehaviour
             player.position
         );
 
-        if (distance <= chaseRange)
+        // ซ่อนในตู้อยู่ ผีเลิกไล่
+        if (distance <= chaseRange && !PlayerHide.IsPlayerHidden(player))
         {
             if (!isChasing)
             {

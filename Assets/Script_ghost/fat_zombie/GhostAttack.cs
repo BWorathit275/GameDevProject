@@ -41,6 +41,10 @@ public class GhostAttack : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) > attackRange + 0.5f)
             return;
 
+        // หลบเข้าตู้ทันก่อนโดนตี
+        if (PlayerHide.IsPlayerHidden(player))
+            return;
+
         PlayerHealth health = player.GetComponentInParent<PlayerHealth>();
         if (health != null)
         {

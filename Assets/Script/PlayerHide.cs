@@ -4,6 +4,14 @@ public class PlayerHide : MonoBehaviour
 {
     public bool IsHidden { get; private set; }
 
+    // True if this transform belongs to a player hiding in a locker. Ghosts use it to ignore hidden players.
+    public static bool IsPlayerHidden(Transform player)
+    {
+        if (player == null) return false;
+        PlayerHide hide = player.GetComponentInParent<PlayerHide>();
+        return hide != null && hide.IsHidden;
+    }
+
     [SerializeField] MonoBehaviour movementScript;   // สคริปต์เดินของคุณ
     [SerializeField] CharacterController controller; // ถ้าใช้ CharacterController
     [SerializeField] LockerLook lockerLook;

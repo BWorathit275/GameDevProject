@@ -26,7 +26,9 @@ public class ThinGhostAI : MonoBehaviour
 
 
     [Header("Search")]
-    public float searchDuration = 3f;
+    public float searchDuration = 3f;   // เวลาเดินหารอบจุดที่เห็นผู้เล่นล่าสุด ก่อนกลับไปลาดตระเวน
+    public float loseSightGrace = 1f;   // คลาดสายตาแล้วยังตามผู้เล่นต่ออีกกี่วินาที (เหมือนได้ยินเสียง)
+    public float searchRadius = 4f;     // รัศมีที่เดินหารอบจุดที่เห็นล่าสุด
 
     private NavMeshAgent agent;
     private Transform player;
@@ -40,6 +42,10 @@ public class ThinGhostAI : MonoBehaviour
     private float attackTimer;
 
     private Vector3 lastKnownPlayerPosition;
+    private float lastSeenTime = -999f;
+    private bool reachedLastKnown;
+    private float searchStartTime;
+    private float searchPointGiveUpTime;
 
     void Awake()
     {
@@ -120,11 +126,13 @@ public class ThinGhostAI : MonoBehaviour
         );
 
         bool canSeePlayer = vision.CanSeePlayer();
+        bool playerHidden = PlayerHide.IsPlayerHidden(player);
 
         // จำตำแหน่งล่าสุดของผู้เล่นที่มองเห็น
         if (canSeePlayer)
         {
             lastKnownPlayerPosition = player.position;
+            lastSeenTime = Time.time;
             searchTimer = 0f;
             searching = false;
 
@@ -146,8 +154,9 @@ public class ThinGhostAI : MonoBehaviour
             }
         }
 
-        // ถ้าผู้เล่นอยู่ไกลเกินไป ให้กลับไปลาดตระเวน
-        if (distance > losePlayerDistance)
+        // ถ้าผู้เล่นอยู่ไกลเกินไป ให้เลิกไล่แล้วกลับไปลาดตระเวน
+        // (เฉพาะตอนไล่หรือค้นหาอยู่ ไม่งั้นผีจะถูกสั่งกลับจุดใกล้สุดทุกเฟรมและไม่เดินลาดตระเวน)
+        if (distance > losePlayerDistance && (chasing || searching))
         {
             ReturnToPatrol();
             return;
@@ -202,100 +211,56 @@ public class ThinGhostAI : MonoBehaviour
             if (ghostAnimation != null)
                 ghostAnimation.SetChasing(true);
 
-            // ไล่ผู้เล่น
-            if (chasing)
+            // ถึงตัวผู้เล่นแล้วจึงโจมตี (ไม่โจมตีถ้าซ่อนในตู้)
+            if (distance <= attackRange && !playerHidden)
             {
-                if (patrol.enabled)
-                    patrol.enabled = false;
+                agent.isStopped = true;
+                StopWalkSound();
 
-                agent.speed = chaseSpeed;
-
-                if (ghostAnimation != null)
-                    ghostAnimation.SetChasing(true);
-
-                // ถึงตัวผู้เล่นแล้วจึงโจมตี
-                if (distance <= attackRange)
+                if (!attacking && Time.time >= nextAttackTime)
                 {
-                    agent.isStopped = true;
-                    StopWalkSound();
+                    attack.TryAttack(player);
+                    attacking = true;
+                    nextAttackTime = Time.time + attackCooldown;
 
-                    if (!attacking && Time.time >= nextAttackTime)
-                    {
-                        attack.TryAttack(player);
-                        attacking = true;
-                        nextAttackTime = Time.time + attackCooldown;
+                    attackTimer = attackAnimationDelay
+                        + pauseMovementAfterAttack;
 
-                        attackTimer = attackAnimationDelay
-                            + pauseMovementAfterAttack;
-
-                        if (ghostAnimation != null)
-                            ghostAnimation.PlayAttack();
-
-                        if (ghostSound != null)
-                        {
-                            ghostSound.PlayAttack();
-                            Debug.Log("ThinGhostAI: สั่งเล่นเสียง Attack", this);
-                        }
-                        else
-                        {
-                            Debug.LogError("ThinGhostAI: ไม่พบ ThinGhostSound!", this);
-                        }
-                    }
-
-                    return;
-                }
-
-                // ยังไม่ถึงตัวผู้เล่น ให้ไล่ต่อ
-                if (canSeePlayer)
-                {
-                    agent.isStopped = false;
-                    agent.SetDestination(player.position);
-
-                    // เมื่อกำลังไล่ ให้หยุด Walk และคง Scream ไว้
-                    StopWalkSound();
-                }
-                else
-                {
-                    chasing = false;
-                    searching = true;
-                    searchTimer = 0f;
+                    if (ghostAnimation != null)
+                        ghostAnimation.PlayAttack();
 
                     if (ghostSound != null)
                     {
-                        ghostSound.StopScream();
-                        ghostSound.StopWalk();
+                        ghostSound.PlayAttack();
+                        Debug.Log("ThinGhostAI: สั่งเล่นเสียง Attack", this);
                     }
-
-                    agent.isStopped = false;
-                    agent.SetDestination(lastKnownPlayerPosition);
+                    else
+                    {
+                        Debug.LogError("ThinGhostAI: ไม่พบ ThinGhostSound!", this);
+                    }
                 }
 
                 return;
             }
-           
 
-            // ถ้ายังมองเห็นผู้เล่น ให้ไล่ต่อ
-            if (canSeePlayer)
+            // ยังเห็นอยู่ หรือเพิ่งคลาดสายตาไม่นาน (และไม่ได้ซ่อนในตู้) ให้ไล่ต่อ
+            bool stillTracking = canSeePlayer ||
+                (!playerHidden && Time.time - lastSeenTime < loseSightGrace);
+
+            if (stillTracking)
             {
+                // ตามไปทางที่ผู้เล่นหนีไป แม้จะเลี้ยวพ้นสายตาแล้ว
+                lastKnownPlayerPosition = player.position;
+
                 agent.isStopped = false;
                 agent.SetDestination(player.position);
-                UpdateWalkSound();
+
+                // เมื่อกำลังไล่ ให้หยุด Walk และคง Scream ไว้
+                StopWalkSound();
             }
             else
             {
-                // ถ้ามองไม่เห็น ให้ไปยังตำแหน่งสุดท้ายที่เห็น
-                chasing = false;
-                searching = true;
-                searchTimer = 0f;
-
-                if (ghostSound != null)
-                {
-                    ghostSound.StopScream();
-                    ghostSound.StopWalk();
-                }
-
-                agent.isStopped = false;
-                agent.SetDestination(lastKnownPlayerPosition);
+                StartSearch();
             }
 
             return;
@@ -307,35 +272,104 @@ public class ThinGhostAI : MonoBehaviour
             if (patrol.enabled)
                 patrol.enabled = false;
 
-            agent.speed = chaseSpeed;
             agent.isStopped = false;
-
-            if (ghostAnimation != null)
-                ghostAnimation.SetChasing(true);
-
-            searchTimer += Time.deltaTime;
             UpdateWalkSound();
 
-            // พบผู้เล่นอีกครั้ง
-            if (canSeePlayer)
+            // วิ่งไปยังจุดที่เห็นผู้เล่นล่าสุดก่อน
+            if (!reachedLastKnown)
             {
-                searching = false;
-                chasing = true;
+                agent.speed = chaseSpeed;
 
-                if (ghostSound != null)
-                    ghostSound.PlayScream();
+                if (ghostAnimation != null)
+                    ghostAnimation.SetChasing(true);
+
+                bool arrived = !agent.pathPending &&
+                    agent.remainingDistance <= agent.stoppingDistance + 0.3f;
+
+                // ไปไม่ถึงภายใน 8 วินาที ก็เริ่มหาจากตรงนี้เลย
+                if (arrived || Time.time - searchStartTime > 8f)
+                {
+                    reachedLastKnown = true;
+                    GoToSearchPoint();
+                }
 
                 return;
             }
 
-            // ค้นหาครบเวลา หรือถึงตำแหน่งสุดท้ายแล้ว
-            if (searchTimer >= searchDuration ||
-                (!agent.pathPending &&
-                 agent.remainingDistance <= agent.stoppingDistance + 0.2f))
+            // ถึงแล้ว เดินหารอบๆ จุดนั้นสักพัก
+            agent.speed = patrolSpeed;
+
+            if (ghostAnimation != null)
+                ghostAnimation.SetChasing(false);
+
+            searchTimer += Time.deltaTime;
+
+            if (searchTimer >= searchDuration)
             {
                 ReturnToPatrol();
+                return;
             }
+
+            bool atSearchPoint = !agent.pathPending &&
+                agent.remainingDistance <= agent.stoppingDistance + 0.3f;
+
+            if (atSearchPoint || Time.time >= searchPointGiveUpTime)
+                GoToSearchPoint();
         }
+    }
+
+    void StartSearch()
+    {
+        chasing = false;
+        searching = true;
+        searchTimer = 0f;
+        reachedLastKnown = false;
+        searchStartTime = Time.time;
+
+        if (ghostSound != null)
+        {
+            ghostSound.StopScream();
+            ghostSound.StopWalk();
+        }
+
+        agent.isStopped = false;
+        agent.SetDestination(lastKnownPlayerPosition);
+    }
+
+    // สุ่มจุดใกล้ๆ ตำแหน่งที่เห็นผู้เล่นล่าสุด (เดินไปถึงได้จริง และไม่อ้อมไกล) แล้วเดินไปดู
+    void GoToSearchPoint()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            Vector2 offset = Random.insideUnitCircle * searchRadius;
+            Vector3 candidate = lastKnownPlayerPosition + new Vector3(offset.x, 0f, offset.y);
+
+            if (!NavMesh.SamplePosition(candidate, out NavMeshHit hit, 1.5f, NavMesh.AllAreas))
+                continue;
+
+            NavMeshPath path = new NavMeshPath();
+            if (!agent.CalculatePath(hit.position, path) || path.status != NavMeshPathStatus.PathComplete)
+                continue;
+
+            if (PathLength(path) > searchRadius * 2.5f)
+                continue;
+
+            agent.SetPath(path);
+            searchPointGiveUpTime = Time.time + 4f;
+            return;
+        }
+
+        // หาจุดไม่ได้ ให้วนอยู่แถวจุดเดิม
+        agent.SetDestination(lastKnownPlayerPosition);
+        searchPointGiveUpTime = Time.time + 1f;
+    }
+
+    static float PathLength(NavMeshPath path)
+    {
+        float length = 0f;
+        for (int i = 1; i < path.corners.Length; i++)
+            length += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+        return length;
     }
 
     void UpdateWalkSound()

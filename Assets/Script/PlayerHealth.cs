@@ -42,6 +42,10 @@ public class PlayerHealth : MonoBehaviour
     public float healPopTime = 0.35f;
     public Color healFlashColor = new Color(1f, 0.6f, 0.6f, 1f);
 
+    [Header("Game Over")]
+    [Tooltip("Found in the scene if left empty.")]
+    public GameOverScreen gameOverScreen;
+
     private PlayerHide playerHide;
     private float regenProgress;             // 0 to 1; one heart when it reaches 1
 
@@ -185,6 +189,9 @@ public class PlayerHealth : MonoBehaviour
         Time.timeScale = 0f;
         Debug.Log("Player ตายแล้ว!");
 
-        // เพิ่มระบบตายหรือ Game Over ตรงนี้
+        if (gameOverScreen == null)
+            gameOverScreen = FindAnyObjectByType<GameOverScreen>();
+        if (gameOverScreen != null)
+            gameOverScreen.Show();
     }
 }

@@ -15,6 +15,16 @@ public class FatGhostPatrol : MonoBehaviour
     private float waitTimer = 0f;
     private bool waiting = false;
 
+    void Awake()
+    {
+        // จุดลาดตระเวนที่เป็นลูกของผีจะขยับตามผีไปด้วย (เดินไปไม่ถึงสักที)
+        // เลยถอดออกมาไว้กับที่ ตำแหน่งเดิมตอนเริ่มเกม
+        if (patrolPoints != null)
+            foreach (Transform p in patrolPoints)
+                if (p != null && p.IsChildOf(transform))
+                    p.SetParent(null, true);
+    }
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
