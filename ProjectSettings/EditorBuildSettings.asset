@@ -5,8 +5,14 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Basement_Map.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: Assets/BackgroundMenu/BackgroundMenu.unity
+    guid: 6382c8a7c3496dc44a2dcbac535f1257
+  - enabled: 1
+    path: Assets/Scenes/Basement.unity
+    guid: d943e184e587e9b40a069b04313487da
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
