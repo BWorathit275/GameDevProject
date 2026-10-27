@@ -20,6 +20,9 @@ public class PlayerInteraction : MonoBehaviour
     private PickupItem heldItem;
     private PickupItem highlightedItem;
 
+    // ให้สคริปต์อื่น (ประตู, ไม้) ถามได้ว่าถืออะไรอยู่
+    public PickupItem Held => heldItem;
+
     void Start()
     {
         HidePrompt();
@@ -38,6 +41,28 @@ public class PlayerInteraction : MonoBehaviour
                 "PlayerInteraction: กรุณากำหนด Hand Hold Point"
             );
         }
+    }
+
+    public bool IsHolding(ItemType type)
+    {
+        return heldItem != null && heldItem.itemType == type;
+    }
+
+    public bool IsHoldingKey(string id)
+    {
+        return heldItem != null
+            && heldItem.itemType == ItemType.Key
+            && heldItem.itemName == id;
+    }
+
+    // ใช้ของทิ้ง เช่น กุญแจใช้แล้วหาย
+    public void ConsumeHeld()
+    {
+        if (heldItem == null) return;
+
+        GameObject obj = heldItem.gameObject;
+        heldItem = null;
+        Destroy(obj);
     }
 
     void Update()

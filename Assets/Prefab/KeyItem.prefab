@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6202248377633566000, guid: 609cad5eb478dd849beaf2705286bdf7, type: 3}
       propertyPath: m_Name
-      value: Key Variant
+      value: KeyItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -70,43 +70,22 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6202248377633566000, guid: 609cad5eb478dd849beaf2705286bdf7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3655653626768215369}
-    - targetCorrespondingSourceObject: {fileID: 6202248377633566000, guid: 609cad5eb478dd849beaf2705286bdf7, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 447316715039307243}
     - targetCorrespondingSourceObject: {fileID: 6202248377633566000, guid: 609cad5eb478dd849beaf2705286bdf7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5169527764177116839}
+      addedObject: {fileID: 2803688381632190635}
     - targetCorrespondingSourceObject: {fileID: 6202248377633566000, guid: 609cad5eb478dd849beaf2705286bdf7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1715939353421409980}
+      addedObject: {fileID: 2011730229117984485}
+    - targetCorrespondingSourceObject: {fileID: 6202248377633566000, guid: 609cad5eb478dd849beaf2705286bdf7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3777067226762449064}
   m_SourcePrefab: {fileID: 100100000, guid: 609cad5eb478dd849beaf2705286bdf7, type: 3}
 --- !u!1 &285805866614134289 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6202248377633566000, guid: 609cad5eb478dd849beaf2705286bdf7, type: 3}
   m_PrefabInstance: {fileID: 6189549947693923105}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &3655653626768215369
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285805866614134289}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.12466918, y: 0.16383597, z: 0.03850209}
-  m_Center: {x: 0.016344756, y: 0.00005733925, z: -0.0008556149}
 --- !u!54 &447316715039307243
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &5169527764177116839
+--- !u!114 &2803688381632190635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,9 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   itemName: KEY1
-  heldPosition: {x: 0, y: 0, z: 0}
-  heldRotation: {x: -90, y: 90, z: 0}
---- !u!114 &1715939353421409980
+  itemType: 0
+  heldPosition: {x: 0.25, y: -0.2, z: 0.6}
+  heldRotation: {x: 0, y: 0, z: 0}
+--- !u!114 &2011730229117984485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,5 +141,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dddf8a647c979674d93f9c9bcd9cb127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemHighlight
-  outlineColor: {r: 0, g: 1, b: 0, a: 1}
-  outlineWidth: 0.025
+  outlineColor: {r: 0.2, g: 1, b: 0.4, a: 1}
+  cornerColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0.012
+  padding: 0.02
+  cornersOnly: 1
+  cornerLength: 0.3
+  pulse: 1
+  pulseSpeed: 4
+  pulseAmount: 0.35
+--- !u!65 &3777067226762449064
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285805866614134289}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.11175503, y: 0.14430757, z: 0.028907297}
+  m_Center: {x: 0.017557142, y: -0.001440173, z: 0.00086799945}
