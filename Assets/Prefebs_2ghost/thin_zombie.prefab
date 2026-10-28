@@ -679,24 +679,31 @@ MonoBehaviour:
     - {fileID: 8300000, guid: d2851ebb83600794691a00e1f88e83d5, type: 3}
     - {fileID: 8300000, guid: b50130c0e567fcc448cb68cb18305210, type: 3}
     - {fileID: 8300000, guid: aa2319ded03207b4eae250450b72e3d8, type: 3}
+    firstClip: {fileID: 0}
+    firstGap: {x: 0.2, y: 0.6}
     gap: {x: 4, y: 9}
     pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 0.8, y: 1}
   screamSource: {fileID: 552980881480958898}
-  screamSound: {fileID: 8300000, guid: 1791e6320a1c1ac4e9f024fd9a055155, type: 3}
+  screamSound: {fileID: 8300000, guid: e0403806b6f70d449b74cb85ea55f862, type: 3}
   screamVoice:
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 1791e6320a1c1ac4e9f024fd9a055155, type: 3}
+    firstClip: {fileID: 8300000, guid: 1791e6320a1c1ac4e9f024fd9a055155, type: 3}
+    firstGap: {x: 0.2, y: 0.6}
     gap: {x: 1.5, y: 4}
     pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 0.8, y: 1}
   searchVoice:
     clips:
     - {fileID: 8300000, guid: 699ec33e61d56ff49b1562bf45e6020f, type: 3}
+    firstClip: {fileID: 0}
+    firstGap: {x: 0.2, y: 0.6}
     gap: {x: 2, y: 5}
     pitchRange: {x: 0.9, y: 1.1}
     volumeRange: {x: 0.8, y: 1}
   attackSource: {fileID: 9204448710358390305}
-  attackSound: {fileID: 8300000, guid: e0403806b6f70d449b74cb85ea55f862, type: 3}
+  attackSound: {fileID: 8300000, guid: e408ce0fb9e9b8446ab1782d63536550, type: 3}
   attackSoundDelay: 0.75
 --- !u!114 &654522752821662805
 MonoBehaviour:

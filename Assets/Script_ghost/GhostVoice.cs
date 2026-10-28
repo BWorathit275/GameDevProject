@@ -7,6 +7,10 @@ public class GhostVoice
 {
     [Tooltip("คลิปที่สุ่มเล่น (ไม่ซ้ำคลิปเดิมติดกัน)")]
     public AudioClip[] clips;
+    [Tooltip("คลิปที่เล่นก่อนเสมอตอนเริ่ม (เช่นกรีดร้องตอนเห็นผู้เล่น) ว่างไว้ = สุ่มตามปกติ")]
+    public AudioClip firstClip;
+    [Tooltip("ช่วงเงียบหลัง First Clip ก่อนเสียงถัดไป (สั้นกว่าปกติ ให้ต่อเนื่อง)")]
+    public Vector2 firstGap = new Vector2(0.2f, 0.6f);
     [Tooltip("ช่วงเงียบระหว่างเสียง (วินาที) ต่ำสุด-สูงสุด หลังเสียงก่อนหน้าจบ")]
     public Vector2 gap = new Vector2(3f, 7f);
     public Vector2 pitchRange = new Vector2(0.9f, 1.1f);
@@ -29,7 +33,7 @@ public class GhostVoice
 
         // เพิ่งร้องไปไม่นาน (เช่นผู้เล่นโผล่ๆ หายๆ) ไม่ต้องร้องซ้ำทันที
         if (playNow && Time.time >= lastEnd + gap.x * 0.5f)
-            Play(source);
+            Play(source, firstClip);
         else if (playNow)
             nextTime = Mathf.Max(nextTime, lastEnd + gap.x);
         else
@@ -58,7 +62,7 @@ public class GhostVoice
             Play(source);
     }
 
-    void Play(AudioSource source)
+    void Play(AudioSource source, AudioClip forced = null)
     {
         if (source == null || !HasClips)
         {
@@ -66,12 +70,21 @@ public class GhostVoice
             return;
         }
 
-        int index = Random.Range(0, clips.Length);
-        if (clips.Length > 1 && index == lastClip)
-            index = (index + 1) % clips.Length;
-        lastClip = index;
+        AudioClip clip = forced;
 
-        AudioClip clip = clips[index];
+        if (clip != null)
+        {
+            lastClip = System.Array.IndexOf(clips, clip);
+        }
+        else
+        {
+            int index = Random.Range(0, clips.Length);
+            if (clips.Length > 1 && index == lastClip)
+                index = (index + 1) % clips.Length;
+            lastClip = index;
+            clip = clips[index];
+        }
+
         if (clip == null)
         {
             nextTime = Time.time + gap.x;
@@ -85,6 +98,8 @@ public class GhostVoice
         source.Play();
 
         lastEnd = Time.time + clip.length / pitch;
-        nextTime = lastEnd + Random.Range(gap.x, gap.y);
+
+        Vector2 wait = forced != null && forced == firstClip ? firstGap : gap;
+        nextTime = lastEnd + Random.Range(wait.x, wait.y);
     }
 }
