@@ -343,6 +343,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 27c70984b9f4990489d83faa91f41371, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4431572347658528373}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 27c70984b9f4990489d83faa91f41371, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2801859783163293705}
   m_SourcePrefab: {fileID: 100100000, guid: 27c70984b9f4990489d83faa91f41371, type: 3}
 --- !u!95 &3914096646575178349 stripped
 Animator:
@@ -467,6 +470,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FatGhostSound
   screamSource: {fileID: 4431572347658528373}
   screamSound: {fileID: 8300000, guid: b419631bff9bd4a4ea21fbb930152d1e, type: 3}
+  screamVoice:
+    clips: []
+    gap: {x: 2, y: 5}
+    pitchRange: {x: 0.8, y: 0.95}
+    volumeRange: {x: 0.8, y: 1}
+  idleVoice:
+    clips: []
+    gap: {x: 6, y: 12}
+    pitchRange: {x: 0.75, y: 0.9}
+    volumeRange: {x: 0.8, y: 1}
 --- !u!82 &4431572347658528373
 AudioSource:
   m_ObjectHideFlags: 0
@@ -564,3 +577,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2801859783163293705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780626214617924269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f61c3aa61d13243bbfa9e953d2ade1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Footsteps
+  clips: []
+  stepDistance: 1.8
+  minSpeed: 0.1
+  pitchRange: {x: 0.7, y: 0.85}
+  volumeRange: {x: 0.75, y: 1}
+  spatialBlend: 1
+  maxDistance: 20

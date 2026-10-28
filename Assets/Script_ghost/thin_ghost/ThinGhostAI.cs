@@ -142,6 +142,7 @@ public class ThinGhostAI : MonoBehaviour
 
                 if (ghostSound != null)
                 {
+                    ghostSound.SetSearching(false);
                     ghostSound.StopWalk();
                     ghostSound.PlayScream();
 
@@ -330,6 +331,7 @@ public class ThinGhostAI : MonoBehaviour
         {
             ghostSound.StopScream();
             ghostSound.StopWalk();
+            ghostSound.SetSearching(true);
         }
 
         agent.isStopped = false;
@@ -404,6 +406,7 @@ public class ThinGhostAI : MonoBehaviour
 
         if (ghostSound != null)
         {
+            ghostSound.SetSearching(false);
             ghostSound.StopScream();
             ghostSound.StopWalk();
         }

@@ -487,6 +487,7 @@ GameObject:
   - component: {fileID: 7017116645403246556}
   - component: {fileID: 552980881480958898}
   - component: {fileID: 9204448710358390305}
+  - component: {fileID: 31903789221496700}
   m_Layer: 0
   m_Name: thin_zombie
   m_TagString: Untagged
@@ -610,6 +611,7 @@ MonoBehaviour:
   - {fileID: 2482457509056957932}
   - {fileID: 2408132123044378244}
   waitTime: 2
+  randomOrder: 1
 --- !u!114 &3128396644183958926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,11 +671,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThinGhostSound
   walkSource: {fileID: 7017116645403246556}
-  walkSound: {fileID: 8300000, guid: aee01cf0363941c4b8f79c601d6df5d4, type: 3}
+  walkSound: {fileID: 0}
+  walkVoice:
+    clips:
+    - {fileID: 8300000, guid: a899b947e3b5fe044bea61de851eb543, type: 3}
+    - {fileID: 8300000, guid: bbc6ce475912c184ba6a6d64584cb302, type: 3}
+    - {fileID: 8300000, guid: d2851ebb83600794691a00e1f88e83d5, type: 3}
+    - {fileID: 8300000, guid: b50130c0e567fcc448cb68cb18305210, type: 3}
+    - {fileID: 8300000, guid: aa2319ded03207b4eae250450b72e3d8, type: 3}
+    gap: {x: 4, y: 9}
+    pitchRange: {x: 0.9, y: 1.1}
+    volumeRange: {x: 0.8, y: 1}
   screamSource: {fileID: 552980881480958898}
   screamSound: {fileID: 8300000, guid: 1791e6320a1c1ac4e9f024fd9a055155, type: 3}
+  screamVoice:
+    clips: []
+    gap: {x: 1.5, y: 4}
+    pitchRange: {x: 0.9, y: 1.1}
+    volumeRange: {x: 0.8, y: 1}
+  searchVoice:
+    clips:
+    - {fileID: 8300000, guid: 699ec33e61d56ff49b1562bf45e6020f, type: 3}
+    gap: {x: 2, y: 5}
+    pitchRange: {x: 0.9, y: 1.1}
+    volumeRange: {x: 0.8, y: 1}
   attackSource: {fileID: 9204448710358390305}
-  attackSound: {fileID: 8300000, guid: e408ce0fb9e9b8446ab1782d63536550, type: 3}
+  attackSound: {fileID: 8300000, guid: e0403806b6f70d449b74cb85ea55f862, type: 3}
   attackSoundDelay: 0.75
 --- !u!114 &654522752821662805
 MonoBehaviour:
@@ -978,6 +1001,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &31903789221496700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2530200165947951720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f61c3aa61d13243bbfa9e953d2ade1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Footsteps
+  clips: []
+  stepDistance: 1.3
+  minSpeed: 0.3
+  pitchRange: {x: 0.9, y: 1.1}
+  volumeRange: {x: 0.75, y: 1}
+  spatialBlend: 1
+  maxDistance: 20
 --- !u!1 &2553891152743998738
 GameObject:
   m_ObjectHideFlags: 0

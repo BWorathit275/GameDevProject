@@ -315,6 +315,7 @@ GameObject:
   - component: {fileID: 9160152607710158434}
   - component: {fileID: 216746910493360207}
   - component: {fileID: 3078076968323780619}
+  - component: {fileID: 4131149943710771604}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -440,6 +441,25 @@ MonoBehaviour:
   promptText: {fileID: 0}
   pickupKey: 101
   dropKey: 113
+--- !u!114 &4131149943710771604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624588712656667177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f61c3aa61d13243bbfa9e953d2ade1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Footsteps
+  clips: []
+  stepDistance: 1.4
+  minSpeed: 0.3
+  pitchRange: {x: 0.9, y: 1.1}
+  volumeRange: {x: 0.75, y: 1}
+  spatialBlend: 0
+  maxDistance: 20
 --- !u!1 &5645293730918843116
 GameObject:
   m_ObjectHideFlags: 0
