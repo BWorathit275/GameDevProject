@@ -13,6 +13,9 @@ public class Door : MonoBehaviour
     public string requiredKeyId = "KEY1";     // ต้องตรงกับ Item Name ของกุญแจ
     public bool consumeKey = false;           // ติ๊กถ้าอยากให้กุญแจหายหลังไข
 
+    [Header("Wood Barrier (ไม่ใช้ก็เว้นว่าง)")]
+    public WoodBarrier barrier;
+
     [Header("Sound (ไม่บังคับ)")]
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip openSound;
@@ -61,6 +64,13 @@ public class Door : MonoBehaviour
     {
         if (!playerInRange || isMoving || !Input.GetKeyDown(interactKey))
             return;
+
+        // 1) ไม้ยังตอกประตูอยู่
+        if (barrier != null && !barrier.IsCleared)
+        {
+            Debug.Log("ประตูถูกตอกไม้ไว้ ต้องงัดออกก่อน");
+            return;
+        }
 
         // 2) ประตูล็อกอยู่
         if (isLocked)
