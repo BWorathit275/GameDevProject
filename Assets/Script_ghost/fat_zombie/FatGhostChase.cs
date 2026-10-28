@@ -30,7 +30,11 @@ public class FatGhostChase : MonoBehaviour
     public Animator animator;
 
     private NavMeshAgent agent;
+    private float patrolSpeed; // ความเร็วเดิมตอนลาดตระเวน ไว้คืนค่าหลังเลิกไล่
     private bool isChasing;
+
+    // ให้สคริปต์อื่น (เช่นเสียงบรรยากาศ) รู้ว่าผีกำลังไล่อยู่
+    public bool IsChasing => isChasing;
     private bool isAttacking;
     private bool isPausingAfterAttack;
     private float nextAttackTime;
@@ -40,6 +44,9 @@ public class FatGhostChase : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+            patrolSpeed = agent.speed;
 
         if (fatGhostAnimation == null)
             fatGhostAnimation = GetComponent<FatGhostAnimation>();
@@ -159,6 +166,7 @@ public class FatGhostChase : MonoBehaviour
             if (fatGhostPatrol != null)
                 fatGhostPatrol.enabled = true;
 
+            agent.speed = patrolSpeed;
             agent.isStopped = false;
         }
 

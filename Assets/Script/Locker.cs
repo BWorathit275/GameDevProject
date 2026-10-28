@@ -8,6 +8,8 @@ public class Locker : MonoBehaviour
     [SerializeField] Animator doorAnimator; // ไม่บังคับ
 
     PlayerHide player;
+    PlayerHealth health;
+    PlayerInteraction interaction;
     bool playerInRange;
     bool occupied;
 
@@ -22,6 +24,8 @@ public class Locker : MonoBehaviour
         {
             Debug.Log("Trigger enter: " + other.name + " tag=" + other.tag);
             player = other.GetComponent<PlayerHide>();
+            health = other.GetComponentInParent<PlayerHealth>();
+            interaction = other.GetComponentInParent<PlayerInteraction>();
             playerInRange = true;
         }
     }
@@ -35,6 +39,12 @@ public class Locker : MonoBehaviour
     void Update()
     {
         if (!playerInRange || !Input.GetKeyDown(interactKey)) return;
+
+        // ตายแล้วใช้ตู้ไม่ได้
+        if (health != null && health.IsDead) return;
+
+        // เล็งไอเทมอยู่ ให้ E เก็บของแทนการเข้าตู้
+        if (!occupied && interaction != null && interaction.IsAimingAtItem) return;
 
         if (!occupied) Enter();
         else Exit();

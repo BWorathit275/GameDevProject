@@ -23,6 +23,9 @@ public class PlayerInteraction : MonoBehaviour
     // ให้สคริปต์อื่น (ประตู, ไม้) ถามได้ว่าถืออะไรอยู่
     public PickupItem Held => heldItem;
 
+    // เล็งไอเทมอยู่ (ตู้จะไม่รับปุ่ม E แข่งกับการเก็บของ)
+    public bool IsAimingAtItem => heldItem == null && currentItem != null;
+
     void Start()
     {
         HidePrompt();
@@ -78,6 +81,15 @@ public class PlayerInteraction : MonoBehaviour
                 DropItem();
             }
 
+            return;
+        }
+
+        // ซ่อนในตู้อยู่ เก็บของไม่ได้ (E ใช้ออกจากตู้)
+        if (PlayerHide.IsPlayerHidden(transform))
+        {
+            currentItem = null;
+            UpdateHighlight(null);
+            HidePrompt();
             return;
         }
 

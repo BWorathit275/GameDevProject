@@ -50,6 +50,7 @@ public class PlayerHealth : MonoBehaviour
     private float regenProgress;             // 0 to 1; one heart when it reaches 1
 
     private bool isDead = false;
+    public bool IsDead => isDead;
 
     void Awake()
     {
