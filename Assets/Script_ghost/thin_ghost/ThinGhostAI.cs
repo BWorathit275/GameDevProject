@@ -35,6 +35,9 @@ public class ThinGhostAI : MonoBehaviour
 
     private bool chasing;
     private bool searching;
+
+    // ให้สคริปต์อื่น (เช่นเสียงบรรยากาศ) รู้ว่าผีกำลังไล่อยู่
+    public bool IsChasing => chasing;
     private bool attacking;
 
     private float nextAttackTime;

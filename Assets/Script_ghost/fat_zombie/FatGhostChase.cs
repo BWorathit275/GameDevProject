@@ -31,6 +31,9 @@ public class FatGhostChase : MonoBehaviour
 
     private NavMeshAgent agent;
     private bool isChasing;
+
+    // ให้สคริปต์อื่น (เช่นเสียงบรรยากาศ) รู้ว่าผีกำลังไล่อยู่
+    public bool IsChasing => isChasing;
     private bool isAttacking;
     private bool isPausingAfterAttack;
     private float nextAttackTime;
