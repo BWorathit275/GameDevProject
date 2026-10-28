@@ -56,25 +56,19 @@ public class GameOverScreen : MonoBehaviour
         group.blocksRaycasts = false;
     }
 
+    // SceneFader undoes the death freeze (time and sound) once the screen is black.
     public void Retry()
     {
-        Resume();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        group.interactable = false;
+        SceneFader.FadeToScene(SceneManager.GetActiveScene().name);
     }
 
     public void MainMenu()
     {
-        Resume();
+        group.interactable = false;
         // The menu needs a free mouse cursor.
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        SceneManager.LoadScene(menuScene);
-    }
-
-    // Undo the death freeze before leaving, or the next scene starts frozen and silent.
-    void Resume()
-    {
-        Time.timeScale = 1f;
-        AudioListener.pause = false;
+        SceneFader.FadeToScene(menuScene);
     }
 }
