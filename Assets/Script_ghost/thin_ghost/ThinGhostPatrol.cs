@@ -5,6 +5,7 @@ public class ThinGhostPatrol : MonoBehaviour
 {
     public Transform[] patrolPoints;
     public float waitTime = 2f;
+    public bool randomOrder = true;   // สุ่มจุดถัดไป (ไม่ซ้ำจุดเดิม) แทนการเดินตามลำดับ
 
     private NavMeshAgent agent;
     private int currentPoint = 0;
@@ -92,7 +93,17 @@ public class ThinGhostPatrol : MonoBehaviour
         }
 
         agent.SetDestination(patrolPoints[currentPoint].position);
-        currentPoint = (currentPoint + 1) % patrolPoints.Length;
+        currentPoint = PickNextPoint(currentPoint);
+    }
+
+    int PickNextPoint(int current)
+    {
+        if (!randomOrder || patrolPoints.Length < 2)
+            return (current + 1) % patrolPoints.Length;
+
+        // สุ่มจุดอื่นที่ไม่ใช่จุดที่กำลังเดินไป
+        int next = Random.Range(0, patrolPoints.Length - 1);
+        return next >= current ? next + 1 : next;
     }
 
     public void ReturnToNearestPoint()
