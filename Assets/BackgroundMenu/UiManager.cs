@@ -11,7 +11,8 @@ public class UIManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        SceneManager.LoadScene("LoadingScene");
+    GameState.NewGame();
+    SceneManager.LoadScene("LoadingScene");
     }
 
     public void ShowMainMenu()
@@ -49,5 +50,13 @@ public class UIManager : MonoBehaviour
     public void CancelExit()
     {
         ShowMainMenu();
+    }
+
+    public void ContinueGame()
+    {
+        if (!GameState.HasSave) return;      // ยังไม่เคยเซฟ ไม่ทำอะไร
+
+        GameState.Load();                    // ดึง snapshot จากเครื่อง
+        SceneManager.LoadScene("LoadingScene");
     }
 }
