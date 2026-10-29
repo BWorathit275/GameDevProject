@@ -5,19 +5,21 @@ using UnityEngine.UI;
 public class AudioSettingsManager : MonoBehaviour
 {
     public AudioMixer audioMixer;
-    public Slider musicSlider;
+    public Slider volumeSlider;
 
-    private const string MusicKey = "MusicVolume";
+    private const string VolumeKey = "MasterVolume";
 
     void Start()
     {
-        float volume = PlayerPrefs.GetFloat(MusicKey, 0.8f);
+        float volume = PlayerPrefs.GetFloat(VolumeKey, 0.8f);
 
-        musicSlider.SetValueWithoutNotify(volume);
-        SetMusicVolume(volume);
+        if (volumeSlider != null)
+            volumeSlider.SetValueWithoutNotify(volume);
+
+        SetVolume(volume);
     }
 
-    public void SetMusicVolume(float volume)
+    public void SetVolume(float volume)
     {
         volume = Mathf.Clamp01(volume);
 
@@ -25,8 +27,12 @@ public class AudioSettingsManager : MonoBehaviour
             ? -80f
             : Mathf.Log10(volume) * 20f;
 
-        audioMixer.SetFloat("MusicVolume", dB);
-        PlayerPrefs.SetFloat(MusicKey, volume);
+        Debug.Log($"volume={volume}, dB={dB}");
+
+        if (!audioMixer.SetFloat("MasterVolume", dB))
+            Debug.LogError("หา exposed parameter ชื่อ MasterVolume ไม่เจอ!");
+
+        PlayerPrefs.SetFloat(VolumeKey, volume);
         PlayerPrefs.Save();
     }
 }

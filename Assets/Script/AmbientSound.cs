@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 // Level ambience: a quiet looping background bed, plus occasional one-off sounds (drips, creaks, thuds)
 // from a random spot around the player. While a ghost is chasing, the loop gets muffled and a bit quieter
@@ -7,6 +8,7 @@ public class AmbientSound : MonoBehaviour
 {
     [Header("Background loop")]
     public AudioClip loop;
+    public AudioMixerGroup outputGroup;
     [Range(0f, 1f)] public float loopVolume = 0.35f;
     public float fadeInTime = 3f;
 
@@ -49,6 +51,7 @@ public class AmbientSound : MonoBehaviour
         loopSource.playOnAwake = false;
         loopSource.spatialBlend = 0f;
         loopSource.volume = 0f;
+        loopSource.outputAudioMixerGroup = outputGroup;
 
         // Only affects the loop: the one-off source lives on a child object.
         muffle = gameObject.AddComponent<AudioLowPassFilter>();
@@ -62,6 +65,7 @@ public class AmbientSound : MonoBehaviour
         shotSource.rolloffMode = AudioRolloffMode.Linear;
         shotSource.minDistance = 2f;
         shotSource.maxDistance = 25f;
+        shotSource.outputAudioMixerGroup = outputGroup;
     }
 
     void Start()

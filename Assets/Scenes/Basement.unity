@@ -4595,6 +4595,34 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4326039044185774730, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_MinValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326039044185774730, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326039044185774730, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326039044185774730, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 648011261}
+    - target: {fileID: 4326039044185774730, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326039044185774730, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AudioSettingsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326039044185774730, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4575157879471304551, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4602,6 +4630,26 @@ PrefabInstance:
     - target: {fileID: 4575157879471304551, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238804492026644899, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238804492026644899, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238804492026644899, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2085879277}
+    - target: {fileID: 5238804492026644899, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238804492026644899, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5703255703646555857, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -4635,15 +4683,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Setting_menu
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2385794182659484421, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
     m_RemovedGameObjects:
     - {fileID: 9046971875946934182, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6385378885438659756, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 759203302}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+--- !u!114 &267947683 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4326039044185774730, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
+  m_PrefabInstance: {fileID: 267947682}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &269219037
 GameObject:
   m_ObjectHideFlags: 0
@@ -11094,7 +11151,7 @@ AudioSource:
   m_GameObject: {fileID: 348008324}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8489777998901346038, guid: 05bc4521a375e894f8c582d43fb95dcf, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -15230,7 +15287,7 @@ AudioSource:
   m_GameObject: {fileID: 547605931}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4066024908906164036, guid: 05bc4521a375e894f8c582d43fb95dcf, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -17228,6 +17285,52 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3054109779959143855, guid: 49f0c68fa43a48043a69e40a516c240f, type: 3}
+--- !u!1 &648011260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 648011262}
+  - component: {fileID: 648011261}
+  m_Layer: 0
+  m_Name: AudioSetting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &648011261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648011260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b2dafca4e9eef4e9386217f9709513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioSettingsManager
+  audioMixer: {fileID: 24100000, guid: 05bc4521a375e894f8c582d43fb95dcf, type: 2}
+  volumeSlider: {fileID: 267947683}
+--- !u!4 &648011262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648011260}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 299.0723, y: 718.06616, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &648651133 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8372864644921422780, guid: 7b1a7a7bc3028e54682e468e4fde57db, type: 3}
@@ -18879,22 +18982,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2633717486808404293, guid: 2cc0e80d4edf3b545bd3f1dc2d50f6f3, type: 3}
   m_PrefabInstance: {fileID: 267947682}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &759203302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759203298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1011f1894576443ac3259d0f51e883, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingMng
-  settingMenuPanel: {fileID: 0}
-  mouseSlider: {fileID: 0}
-  playerTransform: {fileID: 0}
-  playerHealth: {fileID: 0}
 --- !u!1001 &763653480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24592,6 +24679,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4431572347658528373, guid: cce6d400aeeb11644b16e5317f77bb99, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -6253164435260751510, guid: 05bc4521a375e894f8c582d43fb95dcf, type: 2}
     - target: {fileID: 4984511513102243739, guid: cce6d400aeeb11644b16e5317f77bb99, type: 3}
       propertyPath: player
       value: 
@@ -31364,6 +31455,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7017116645403246556, guid: b8eef92644925264d93401366d27d057, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -6253164435260751510, guid: 05bc4521a375e894f8c582d43fb95dcf, type: 2}
     m_RemovedComponents:
     - {fileID: 7001276767831256866, guid: b8eef92644925264d93401366d27d057, type: 3}
     m_RemovedGameObjects: []
@@ -72991,6 +73086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmbientSound
   loop: {fileID: 8300000, guid: e1bd48576555c88418f72c3660a2d2c8, type: 3}
+  outputGroup: {fileID: 5321275770657936937, guid: 05bc4521a375e894f8c582d43fb95dcf, type: 2}
   loopVolume: 0.35
   fadeInTime: 3
   oneShots: []
@@ -77422,7 +77518,7 @@ AudioSource:
   m_GameObject: {fileID: 1951219312}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8489777998901346038, guid: 05bc4521a375e894f8c582d43fb95dcf, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -83224,3 +83320,4 @@ SceneRoots:
   - {fileID: 1232624276}
   - {fileID: 1717312014}
   - {fileID: 2085879279}
+  - {fileID: 648011262}

@@ -323,7 +323,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 916316458}
   m_HandleRect: {fileID: 1652782678}
   m_Direction: 0
-  m_MinValue: 0.0001
+  m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.8
@@ -332,7 +332,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208766370}
         m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
-        m_MethodName: SetMusicVolume
+        m_MethodName: SetVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &70667694
 RectTransform:
   m_ObjectHideFlags: 0
@@ -879,8 +879,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b2dafca4e9eef4e9386217f9709513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioSettingsManager
-  audioMixer: {fileID: 24100000, guid: a1e3d7d6b3375894cb3acc8a4b916045, type: 2}
-  musicSlider: {fileID: 22404393}
+  audioMixer: {fileID: 24100000, guid: 05bc4521a375e894f8c582d43fb95dcf, type: 2}
+  volumeSlider: {fileID: 22404393}
 --- !u!4 &208766371
 Transform:
   m_ObjectHideFlags: 0
@@ -6574,7 +6574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319181bf49ba13843817a5521eb62f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuSettings
-  sensitivitySlider: {fileID: 0}
+  sensitivitySlider: {fileID: 1090567260}
 --- !u!1 &1128293443
 GameObject:
   m_ObjectHideFlags: 0
@@ -8063,7 +8063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1576913131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11464,7 +11464,7 @@ AudioSource:
   m_GameObject: {fileID: 1631166304}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 7072427548308533215, guid: a1e3d7d6b3375894cb3acc8a4b916045, type: 2}
+  OutputAudioMixerGroup: {fileID: 6533416786922111477, guid: 05bc4521a375e894f8c582d43fb95dcf, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: aebcd7c21942f2047831af6624900182, type: 3}
   m_PlayOnAwake: 1

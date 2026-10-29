@@ -62,9 +62,24 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        UpdateHearts();
-    }
 
+        // Continue จากเซฟ: ใช้หัวใจที่เซฟไว้แทนค่าเต็ม
+        if (GameState.isContinue)
+        {
+            int saved = GameState.data.health;
+
+            // กันเซฟเก่า/ค่าเริ่มต้นเป็น 0 แล้วเกิดมาตายทันที
+            if (saved > 0)
+                currentHealth = Mathf.Clamp(saved, 1, maxHealth);
+        }
+
+        UpdateHearts();
+
+        // ให้เลือดค้างบนจอ/เอฟเฟกต์บาดเจ็บขึ้นทันที ไม่ต้องไล่ fade-in จาก 0
+        injury = (maxHealth - Mathf.Max(currentHealth, 1)) / (float)(maxHealth - 1);
+        if (injuryAnimator != null)
+            injuryAnimator.SetFloat("Injury", injury);
+    }
     public void TakeDamage(int damage = 1, Transform attacker = null)
     {
         if (isDead) return;
