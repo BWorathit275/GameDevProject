@@ -1,32 +1,36 @@
 
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     public GameObject mainMenuPanel;
-    public GameObject loadGamePanel;
+    public GameObject newgamePanel;
+    public TMP_Dropdown difficultyDropdown;
     public GameObject settingsPanel;
     public GameObject exitPanel;
 
     public void StartNewGame()
     {
-    GameState.NewGame();
-    SceneManager.LoadScene("LoadingScene");
+        Difficulty difficulty = (Difficulty)difficultyDropdown.value;
+
+        GameState.NewGame(difficulty);
+        SceneManager.LoadScene("LoadingScene");
     }
 
     public void ShowMainMenu()
     {
         mainMenuPanel.SetActive(true);
-        loadGamePanel.SetActive(false);
+        newgamePanel.SetActive(false);
         settingsPanel.SetActive(false);
         exitPanel.SetActive(false);
     }
 
-    public void ShowLoadGame()
+    public void ShowNewGame()
     {
         mainMenuPanel.SetActive(false);
-        loadGamePanel.SetActive(true);
+        newgamePanel.SetActive(true);
         settingsPanel.SetActive(false);
         exitPanel.SetActive(false);
     }
@@ -34,7 +38,7 @@ public class UIManager : MonoBehaviour
     public void ShowSettings()
     {
         mainMenuPanel.SetActive(false);
-        loadGamePanel.SetActive(false);
+        newgamePanel.SetActive(false);
         settingsPanel.SetActive(true);
         exitPanel.SetActive(false);
     }
@@ -42,7 +46,7 @@ public class UIManager : MonoBehaviour
     public void ShowExit()
     {
         mainMenuPanel.SetActive(false);
-        loadGamePanel.SetActive(false);
+        newgamePanel.SetActive(false);
         settingsPanel.SetActive(false);
         exitPanel.SetActive(true);
     }

@@ -65,6 +65,20 @@ public class PlayerInteraction : MonoBehaviour
         Destroy(obj);
     }
 
+    // ใช้ตอนโหลดเซฟ: ใส่ของเข้ามือโดยไม่ต้องเล็งหรือกด E
+    public void RestoreHeld(PickupItem item)
+    {
+        if (item == null || handHoldPoint == null || heldItem != null)
+            return;
+
+        UpdateHighlight(null);
+        HidePrompt();
+
+        currentItem = null;
+        heldItem = item;
+        heldItem.PickUp(handHoldPoint);
+    }
+
     void Update()
     {
         // ถ้ามีไอเทมอยู่ในมือแล้ว

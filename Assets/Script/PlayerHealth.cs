@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    [Range(3, 5)]
+    [Range(1, 5)]
     public int maxHealth = 5;
 
     public int currentHealth;
@@ -61,22 +61,23 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        // ตั้งหัวใจสูงสุดตามระดับความยาก (ง่าย 5 / ปกติ 3 / ยาก 1)
+        // ถ้า data.maxHealth เป็น 0 (กด Play ซีนนี้ตรง ๆ) ใช้ค่าจาก Inspector
+        if (GameState.data.maxHealth > 0)
+            maxHealth = Mathf.Clamp(GameState.data.maxHealth, 1, hearts.Length);
+
         currentHealth = maxHealth;
 
-        // Continue จากเซฟ: ใช้หัวใจที่เซฟไว้แทนค่าเต็ม
         if (GameState.isContinue)
         {
             int saved = GameState.data.health;
-
-            // กันเซฟเก่า/ค่าเริ่มต้นเป็น 0 แล้วเกิดมาตายทันที
             if (saved > 0)
                 currentHealth = Mathf.Clamp(saved, 1, maxHealth);
         }
 
         UpdateHearts();
 
-        // ให้เลือดค้างบนจอ/เอฟเฟกต์บาดเจ็บขึ้นทันที ไม่ต้องไล่ fade-in จาก 0
-        injury = (maxHealth - Mathf.Max(currentHealth, 1)) / (float)(maxHealth - 1);
+        injury = CalcInjuryTarget();
         if (injuryAnimator != null)
             injuryAnimator.SetFloat("Injury", injury);
     }
@@ -171,6 +172,14 @@ public class PlayerHealth : MonoBehaviour
         return 0f;
     }
 
+    const int BLOOD_SCALE = 5;
+
+    int BloodHearts()
+    {
+        if (maxHealth <= 0) return BLOOD_SCALE;
+        return Mathf.RoundToInt(currentHealth / (float)maxHealth * BLOOD_SCALE);
+    }
+
     void UpdateHearts()
     {
         for (int i = 0; i < hearts.Length; i++)
@@ -185,14 +194,21 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if (bloodLinger != null)
-            bloodLinger.SetHearts(currentHealth);
+            bloodLinger.SetHearts(BloodHearts());
     }
+
+    // 0 = หัวใจเต็ม, 1 = เหลือดวงสุดท้าย
+    float CalcInjuryTarget()
+    {
+        if (maxHealth <= 1) return 0f; // โหมดยาก: โดนทีเดียวตาย ไม่มีช่วงบาดเจ็บ
+        return (maxHealth - Mathf.Max(currentHealth, 1)) / (float)(maxHealth - 1);
+    }
+
     void Update()
     {
         UpdateRegen();
 
-        // 0 = full hearts, 1 = last heart; eased so it fades in rather than snapping
-        float target = (maxHealth - Mathf.Max(currentHealth, 1)) / (float)(maxHealth - 1);
+        float target = CalcInjuryTarget();
         injury = Mathf.MoveTowards(injury, target, Time.unscaledDeltaTime / injuryBlendTime);
         if (injuryAnimator != null)
             injuryAnimator.SetFloat("Injury", injury);

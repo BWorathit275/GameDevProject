@@ -53,6 +53,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) return;
+
         HandleLook();
         HandleCrouch();
         HandleMovement();
@@ -60,8 +62,9 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleLook()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float sens = MouseSettings.Sensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * sens;
+        float mouseY = Input.GetAxis("Mouse Y") * sens;
 
         // หมุนตัวละครซ้าย-ขวา
         transform.Rotate(Vector3.up * mouseX);

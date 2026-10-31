@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class Door : MonoBehaviour
 {
@@ -13,8 +13,16 @@ public class Door : MonoBehaviour
     public string requiredKeyId = "KEY1";     // ต้องตรงกับ Item Name ของกุญแจ
     public bool consumeKey = false;           // ติ๊กถ้าอยากให้กุญแจหายหลังไข
 
+    [Header("Save")]
+    [Tooltip("ไม่ซ้ำกันทุกบาน เช่น door_room1 (อย่าใช้ซ้ำกับ id ของไอเทม)")]
+    public string doorId;
+
     [Header("Wood Barrier (ไม่ใช้ก็เว้นว่าง)")]
     public WoodBarrier barrier;
+
+    [Header("End Game")]
+    public bool isFinalDoor;          // ติ๊กเฉพาะประตูบานสุดท้าย
+    public float endingDelay = 2f;
 
     [Header("Sound (ไม่บังคับ)")]
     [SerializeField] AudioSource audioSource;
@@ -32,17 +40,36 @@ public class Door : MonoBehaviour
     Quaternion closedRot;
     Quaternion openRot;
 
+    void Awake()
+    {
+        closedRot = transform.localRotation;
+        openRot = closedRot * Quaternion.Euler(0f, openAngle, 0f);
+    }
+
     void Start()
     {
         isLocked = startLocked;
-        closedRot = transform.localRotation;
-        openRot = closedRot * Quaternion.Euler(0f, openAngle, 0f);
+
+        // Continue: ประตูบานนี้เคยปลดล็อกไปแล้ว
+        if (GameState.isContinue && !string.IsNullOrEmpty(doorId) && GameState.IsUsed(doorId))
+            SetUnlockedInstant();
+    }
+
+    void SetUnlockedInstant()
+    {
+        isLocked = false;   // ประตูกลับมาในสภาพปิดแต่ไม่ล็อก
     }
 
     // เรียกจากสคริปต์อื่นได้ ถ้าอยากปลดล็อกด้วยวิธีอื่น (เช่น สวิตช์)
     public void UnlockDoor()
     {
+        if (!isLocked) return;
         isLocked = false;
+
+        if (!string.IsNullOrEmpty(doorId))
+            GameState.MarkUsed(doorId);
+        else
+            Debug.LogWarning("Door: ยังไม่ได้ตั้ง doorId จึงเซฟสถานะปลดล็อกไม่ได้", this);
     }
 
     void OnTriggerEnter(Collider other)
@@ -58,6 +85,17 @@ public class Door : MonoBehaviour
     {
         if (other.GetComponentInParent<PlayerInteraction>() != null)
             playerInRange = false;
+    }
+
+    IEnumerator TriggerEnding()
+    {
+        yield return new WaitForSeconds(endingDelay);
+
+        var health = FindAnyObjectByType<PlayerHealth>();
+        if (health != null && health.currentHealth <= 0) yield break; // ตายระหว่างรอ ไม่ต้องขึ้นจบ
+
+        var ending = FindAnyObjectByType<EndingScreen>();
+        if (ending != null) ending.Show();
     }
 
     void Update()
@@ -77,7 +115,7 @@ public class Door : MonoBehaviour
         {
             if (player != null && player.IsHoldingKey(requiredKeyId))
             {
-                isLocked = false;
+                UnlockDoor();            // ตั้งสถานะและบันทึกลงเซฟ
                 Play(unlockSound);
                 Debug.Log("ปลดล็อกประตูแล้ว");
 
@@ -93,7 +131,11 @@ public class Door : MonoBehaviour
         }
 
         // 3) เปิดหรือปิดประตู
+        bool opening = !isOpen;
         StartCoroutine(Toggle());
+
+        if (isFinalDoor && opening)
+            StartCoroutine(TriggerEnding());
     }
 
     IEnumerator Toggle()
